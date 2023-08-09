@@ -1,8 +1,4 @@
-function overlayClickListener(event) {
-  if (event.target.classList.contains("overlay")) {
-    closePopup();
-  }
-}
+
 
 function displayPopup() {
   const popUpCard = `
@@ -21,7 +17,7 @@ function displayPopup() {
           <p id="response-description" style="display: none;">Here is your discount code you can use in your next order. This coupon code will be valid until 01.01.2024.</p>
           <form id="popup-form">
             <input type="email" id="email" placeholder="Email" required>
-            <input type="phone" id="phone" pattern="[0-9]{10}" placeholder="Phone" required>
+            <input type="text" id="phone" pattern="[0-9]{10}" placeholder="Phone" required>
             <button id="submit-button">BE FIRST</button>
             <label for="gdpr-checkbox" id="checkbox-container">
              <input type="checkbox" id="gdpr-checkbox">
@@ -40,7 +36,7 @@ function displayPopup() {
   const body = document.querySelector("body");
   body.innerHTML += popUpCard;
 
-  const validationMessage = document.getElementById ("validation-message");
+  const validationMessage = document.getElementById("validation-message");
   const checkboxContainer = document.getElementById("checkbox-container");
   const responseHead = document.getElementById("response-head");
   const responseDescription = document.getElementById("response-description");
@@ -86,7 +82,7 @@ function displayPopup() {
       if (response.ok) {
         const couponCode = responseData.coupon_code;
         responseMessage.textContent = couponCode;
-        responseMessage.style.display = "block"
+        responseMessage.style.display = "block";
         checkboxContainer.style.display = "none";
         formDescription.style.display = "none";
         responseDescription.style.display = "block";
@@ -117,9 +113,8 @@ function displayPopup() {
     closePopup();
   });
 
-  // Reattach the overlay click listener
-  document.addEventListener("click", overlayClickListener);
 
+  
   const styleElement = document.createElement("style");
   styleElement.innerHTML = `
     .overlay {
@@ -286,7 +281,7 @@ function closePopup() {
     overlay.remove();
   }
 
-  document.removeEventListener("click", overlayClickListener);
+
 }
 
 document.addEventListener("click", (event) => {
